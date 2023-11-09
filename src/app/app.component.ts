@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { KeyPressService } from './services/key-press.service';
 
 @Component({
@@ -6,10 +6,15 @@ import { KeyPressService } from './services/key-press.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'angular-calculator';
+  allowedKeys: string[] = [];
 
   constructor(private keyPressService: KeyPressService) {}
+
+  ngOnInit(): void {
+    this.allowedKeys = this.keyPressService.allowedKeys;
+  }
 
   @HostListener('window:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {

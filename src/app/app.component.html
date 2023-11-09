@@ -1,3 +1,11 @@
 <div class="wrapper">
     <app-calculator></app-calculator>
+    <div class="keyboard-support">
+        <p>
+            Der er keyboard support for følgende knapper:
+        </p>
+        <ul class="keys-list">
+            <li class="keys-item" *ngFor="let item of allowedKeys">{{ item }}</li>
+        </ul>
+    </div>
 </div>

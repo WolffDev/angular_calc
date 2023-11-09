@@ -3,3 +3,24 @@
   place-content: center;
   margin-top: 10%;
 }
+
+.keyboard-support {
+  margin-top: 2rem;
+  max-width: 245px;
+}
+
+.keys-list {
+  display: flex;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.keys-item {
+  color: #545454;
+}
+
+.keys-item:not(:last-child)::after {
+  content: ",";
+  margin-right: 3px;
+}

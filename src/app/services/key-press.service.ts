@@ -16,7 +16,15 @@ export class KeyPressService {
   }
 
   private allowedKey(key: string): boolean {
-    const allowedKeys = [
+    return this.allowedKeys.includes(key);
+  }
+
+  emitKeyEvent(event: KeyboardEvent): void {
+    this.keyEventSubject.next(event);
+  }
+
+  get allowedKeys(): string[] {
+    return [
       '0',
       '1',
       '2',
@@ -31,14 +39,10 @@ export class KeyPressService {
       '-',
       '*',
       '/',
+      '=',
       'Enter',
       'Escape',
       'Backspace',
     ];
-    return allowedKeys.includes(key);
-  }
-
-  emitKeyEvent(event: KeyboardEvent): void {
-    this.keyEventSubject.next(event);
   }
 }
