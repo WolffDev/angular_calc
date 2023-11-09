@@ -20,7 +20,6 @@ export class CalculatorService {
     this.keyEventSubscription = this.keyPressService.keyEvent$
       .pipe(
         map((event) => {
-          console.log('event', event);
           if (event.key === 'Enter' || event.key === '=') {
             return 'calculate';
           }
