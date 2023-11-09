@@ -21,10 +21,10 @@ export class CalculatorService {
       .pipe(
         map((event) => {
           console.log('event', event);
-          if (event.key === 'Enter') {
+          if (event.key === 'Enter' || event.key === '=') {
             return 'calculate';
           }
-          if (event.key === 'Escape') {
+          if (event.key === 'Escape' || event.key === 'Backspace') {
             return 'clear';
           }
           return event.key;

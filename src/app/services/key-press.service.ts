@@ -33,6 +33,7 @@ export class KeyPressService {
       '/',
       'Enter',
       'Escape',
+      'Backspace',
     ];
     return allowedKeys.includes(key);
   }
