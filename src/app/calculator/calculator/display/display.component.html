@@ -1,4 +1,5 @@
 <div class="display">
     <p>{{ calculationSequence }} </p>
-    <p [innerHTML]="calculationResult | number | colorizeNumber"></p>
+    <p *ngIf="calculationResult !== 'Error'" [innerHTML]="calculationResult | number | colorizeNumber"></p>
+    <p *ngIf="calculationResult === 'Error'">Error in calculation</p>
 </div>

@@ -93,7 +93,12 @@ export class CalculatorService {
     console.log('sequence', sequence);
 
     const result = this.calculateResult(sequence);
-    if (result === null) {
+    if (
+      result === null ||
+      result === undefined ||
+      isNaN(result) ||
+      !isFinite(result)
+    ) {
       this.calculationResultSource.next('Error');
       return;
     }
