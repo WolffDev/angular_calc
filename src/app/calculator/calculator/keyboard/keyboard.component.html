@@ -1,0 +1,4 @@
+<div *ngFor="let buttonRow of buttons" class="button-row">
+    <app-button *ngFor="let button of buttonRow" (clicked)="handleClick($event)" [label]="button.label"
+        [action]="button.action" [value]="button.value" [color]="button.color" [layout]="button.layout"></app-button>
+</div>

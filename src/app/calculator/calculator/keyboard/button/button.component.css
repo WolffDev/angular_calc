@@ -1,0 +1,38 @@
+.button {
+  border: none;
+  height: 50px;
+  width: 50px;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.round {
+  border-radius: 50%;
+}
+
+.rect {
+  width: 55px;
+}
+
+.big {
+  width: 75px;
+  border-radius: 15px;
+}
+
+.long {
+  width: 156px;
+  border-radius: 15px;
+}
+
+.orange {
+  color: #323232;
+  background-color: #ff9800;
+}
+
+.grey {
+  color: #fff;
+  background-color: #6c6c6c;
+  border-radius: 15px;
+}
