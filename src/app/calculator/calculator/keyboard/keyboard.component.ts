@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CalculatorService } from '../../calculator.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { CalculatorService } from '../../calculator.service';
   templateUrl: './keyboard.component.html',
   styleUrls: ['./keyboard.component.css'],
 })
-export class KeyboardComponent {
+export class KeyboardComponent implements OnDestroy {
   buttons: Array<KeyboardButton[]> = [
     [
       { label: '7', value: 7, color: 'orange', layout: 'round' },
@@ -74,6 +74,10 @@ export class KeyboardComponent {
   ];
 
   constructor(private calculatorService: CalculatorService) {}
+
+  ngOnDestroy(): void {
+    this.calculatorService.unsubscribeKeyEvent();
+  }
 
   public handleClick(evetData: ButtonData): void {
     const { value, action } = evetData;

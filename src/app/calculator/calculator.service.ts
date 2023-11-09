@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { KeyPressService } from '../services/key-press.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,11 +11,33 @@ export class CalculatorService {
   private calculationsHistory: string[] = [];
   private calculationSource = new BehaviorSubject<string[]>([]);
   private calculationResultSource = new BehaviorSubject<string>('');
+  private keyEventSubscription!: Subscription;
 
   public calculationResult$ = this.calculationResultSource.asObservable();
   public calculation$ = this.calculationSource.asObservable();
 
-  constructor() {}
+  constructor(private keyPressService: KeyPressService) {
+    this.keyEventSubscription = this.keyPressService.keyEvent$
+      .pipe(
+        map((event) => {
+          console.log('event', event);
+          if (event.key === 'Enter') {
+            return 'calculate';
+          }
+          if (event.key === 'Escape') {
+            return 'clear';
+          }
+          return event.key;
+        })
+      )
+      .subscribe((data) => {
+        if (!!Number(data)) {
+          this.updateCalculation(data);
+        } else {
+          this.updateCalculation(data, 'operation');
+        }
+      });
+  }
 
   public updateCalculation(newValue: string, action?: string): void {
     if (action === 'operation') {
@@ -77,7 +101,7 @@ export class CalculatorService {
     this.calculationResultSource.next(result.toString());
   }
 
-  calculateResult(arr: string[]): number | null {
+  private calculateResult(arr: string[]): number | null {
     const expression = arr.join(' ');
 
     if (expression === '0.1 + 0.2') {
@@ -92,5 +116,9 @@ export class CalculatorService {
       console.error(e);
       return null;
     }
+  }
+
+  public unsubscribeKeyEvent(): void {
+    this.keyEventSubscription.unsubscribe();
   }
 }

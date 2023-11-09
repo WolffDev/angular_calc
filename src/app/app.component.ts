@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { KeyPressService } from './services/key-press.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-calculator';
+
+  constructor(private keyPressService: KeyPressService) {}
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent): void {
+    this.keyPressService.emitKeyEvent(event);
+  }
 }
 
 /**
