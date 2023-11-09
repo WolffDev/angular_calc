@@ -40,6 +40,7 @@ export class KeyPressService {
       '*',
       '/',
       '=',
+      ',',
       'Enter',
       'Escape',
       'Backspace',
